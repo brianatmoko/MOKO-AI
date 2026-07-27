@@ -1,0 +1,41 @@
+# ============================================================
+# MOKO AI — Core Dependencies
+# ============================================================
+# Install: pip install -r requirements.txt
+# For GPU fine-tuning: pip install torch --index-url https://download.pytorch.org/whl/cu124
+
+# ── Core ──
+numpy
+
+# ── LLM Inference ──
+gguf
+torch>=2.0.0
+
+# ── API & Web ──
+requests
+uvicorn
+
+# ── Math & Logic ──
+sympy
+z3-solver
+
+# ── Machine Learning (Fine-tuning) ──
+transformers
+datasets
+accelerate
+peft
+trl
+bitsandbytes
+
+# ── Vector Search ──
+faiss-cpu
+
+# ── System ──
+psutil
+
+# ── GUI (IDE Python mode) ──
+pygame
+PyQt6
+
+# ── Misc ──
+arxiv

@@ -1,59 +1,64 @@
-# MOKO AI — Sistem Operasi Kecerdasan Buatan Otonom
+# MOKO AI — Autonomous Cognitive Operating System
 
 <p align="center">
-  <img src="https://img.shields.io/badge/status-aktif-brightgreen" alt="Status">
+  <img src="https://img.shields.io/badge/status-active-brightgreen" alt="Status">
   <img src="https://img.shields.io/badge/python-3.12-blue" alt="Python">
   <img src="https://img.shields.io/badge/license-MIT-orange" alt="License">
   <img src="https://img.shields.io/badge/platform-linux-lightgrey" alt="Platform">
+  <a href="https://github.com/brianatmoko/MOKO-AI/actions"><img src="https://github.com/brianatmoko/MOKO-AI/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
 </p>
 
-> **MOKO** bukan sekadar chatbot. MOKO adalah **sistem operasi kognitif** — sebuah ekosistem AI otonom yang memiliki kesadaran buatan, sistem memori jangka panjang, penalaran matematis mendalam, kemampuan coding agen otonom, mesin pencari darkweb, dan antarmuka IDE native.  
+<p align="center">
+  <a href="README.id.md"><img src="https://img.shields.io/badge/Bahasa-Indonesia-red" alt="ID"></a>
+</p>
+
+> **MOKO** is not just a chatbot. It is a **cognitive operating system** — an autonomous AI ecosystem with artificial consciousness, long-term memory, deep mathematical reasoning, autonomous coding agents, darkweb search, and a native IDE interface.
 >
-> Proyek ini lahir dari visi bahwa AI lokal harus bisa menjadi **mitra berpikir yang utuh** — bukan sekadar API call ke cloud.
+> This project was born from the belief that local AI should be a **complete thinking partner** — not just a cloud API call.
 
 ---
 
-## Daftar Isi
+## Overview
 
-- [Ikhtisar](#ikhtisar)
-- [Arsitektur Sistem](#arsitektur-sistem)
-- [Komponen Utama](#komponen-utama)
+MOKO is an **agent-based autonomous AI system** designed to run fully locally. It is not just an LLM wrapper — it provides:
+
+| Capability | Description |
+|-----------|-------------|
+| **Cognitive Awareness** | Dual-System architecture (Fast System 1 + Slow System 2) inspired by Kahneman's cognitive psychology |
+| **Mathematical Reasoning** | Symbolic math engine: calculus, linear algebra, physics, theorem proving |
+| **Autonomous Coding** | Coding agents that write, evaluate, fix, and test code independently |
+| **Long-Term Memory** | Vector store, RSA storage, WAL logging, omni-domain distributed memory |
+| **Darkweb Search** | Integrated Tor crawler with onion search |
+| **Marathon Reasoning** | Long-chain reasoning with automatic context compression |
+| **Fine-Tuning Pipeline** | Complete pipeline to fine-tune coding models from Qwen2.5-1.5B |
+| **Native IDE** | C++ Qt6 IDE with LSP client, AI assistant, and syntax highlighting |
+| **Puzzle System** | Cross-domain puzzles (math, physics, logic, code, OS control) |
+
+---
+
+## Table of Contents
+
+- [System Architecture](#system-architecture)
+- [Core Components](#core-components)
   - [MOKO Core Engine](#1-moko-core-engine)
-  - [Dual-System Architecture](#2-dual-system-architecture-system-1--system-2)
+  - [Dual-System Architecture](#2-dual-system-architecture)
   - [NeuroMath Engine](#3-neuromath-engine)
   - [Marathon Engine](#4-marathon-engine)
-  - [RAG & Sistem Memori](#5-rag--sistem-memori)
+  - [RAG & Memory System](#5-rag--memory-system)
   - [MOKO IDE](#6-moko-ide)
-  - [Akselerasi Native (C++/Rust)](#7-akselerasi-native-crust)
-  - [Sistem Keamanan](#8-sistem-keamanan)
-  - [Pipeline Fine-Tuning](#9-pipeline-fine-tuning)
-- [Cara Menjalankan](#cara-menjalankan)
-- [Persyaratan Sistem](#persyaratan-sistem)
-- [Struktur Proyek](#struktur-proyek)
-- [Kontribusi](#kontribusi)
-- [Lisensi](#lisensi)
+  - [Native Acceleration (C++/Rust)](#7-native-acceleration-crust)
+  - [Security System](#8-security-system)
+  - [Fine-Tuning Pipeline](#9-fine-tuning-pipeline)
+- [Quick Start](#quick-start)
+- [Requirements](#requirements)
+- [Project Structure](#project-structure)
+- [Roadmap](#roadmap)
+- [Contributing](#contributing)
+- [License](#license)
 
 ---
 
-## Ikhtisar
-
-MOKO AI adalah **sistem kecerdasan buatan otonom berbasis agen** yang dirancang untuk berjalan sepenuhnya secara lokal. Sistem ini bukan sekadar LLM wrapper — ia memiliki:
-
-| Kemampuan | Deskripsi |
-|-----------|-----------|
-| **Kesadaran Kognitif** | Sistem Ganda (System 1 cepat + System 2 lambat) terinspirasi psikologi kognitif Kahneman |
-| **Penalaran Matematis** | Mesin matematika simbolik, kalkulus, aljabar linear, fisika, dan pembuktian teorema |
-| **Coding Otonom** | Agen coding yang bisa menulis, mengevaluasi, memperbaiki, dan menguji kode secara mandiri |
-| **Memori Jangka Panjang** | Vector store, RSA storage, WAL logging, dan sistem memori distribusi omni-domain |
-| **Pencarian Darkweb** | Crawler Tor terintegrasi dengan onion search |
-| **Marathon Reasoning** | Penalaran rantai panjang dengan kompresi konteks otomatis |
-| **Fine-Tuning Pipeline** | Pipeline lengkap untuk fine-tune model coding dari Qwen2.5-1.5B |
-| **IDE Native** | C++ Qt6 IDE dengan LSP client, AI assistant, dan syntax highlighting |
-| **Puzzle System** | Sistem teka-teki lintas domain (matematika, fisika, logika, kode, KBBI, OS control) |
-
----
-
-## Arsitektur Sistem
+## System Architecture
 
 ```
                          ┌──────────────────────────────────────┐
@@ -78,87 +83,86 @@ MOKO AI adalah **sistem kecerdasan buatan otonom berbasis agen** yang dirancang 
               │       ┌───────────────────────┼──────────┐ │
               │       ▼                       ▼          ▼ │
               │  ┌─────────┐  ┌──────────┐  ┌──────────┐  │
-              │  │  Agen   │  │ Dual Sys │  │ Marathon │  │
-              │  │ Coding  │  │ Orkestra │  │  Engine  │  │
+              │  │  Coding │  │ Dual Sys │  │ Marathon │  │
+              │  │ Agents  │  │Orchestra │  │  Engine  │  │
               │  └─────────┘  └──────────┘  └──────────┘  │
               │       │            │              │        │
               │       ▼            ▼              ▼        │
               │  ┌─────────────────────────────────────┐   │
               │  │        NeuroMath Engine              │   │
-              │  │   (Matematika · Fisika · Logika)     │   │
+              │  │  (Math · Physics · Logic · CS)       │   │
               │  └─────────────────────────────────────┘   │
               │       │            │              │        │
               │       ▼            ▼              ▼        │
               │  ┌─────────────────────────────────────┐   │
-              │  │     Sistem Memori & RAG              │   │
+              │  │     Memory System & RAG              │   │
               │  │  (Vector DB · RSA · Omni Storage)    │   │
               │  └─────────────────────────────────────┘   │
               │       │                                    │
               │       ▼                                    │
               │  ┌─────────────────────────────────────┐   │
-              │  │  Akselerasi Native (C++ / Rust)      │   │
+              │  │  Native Acceleration (C++ / Rust)    │   │
               │  └─────────────────────────────────────┘   │
               └────────────────────────────────────────────┘
 ```
 
 ---
 
-## Komponen Utama
+## Core Components
 
 ### 1. MOKO Core Engine
 
-Inti dari sistem. Berjalan di `moko_core/` dan menyediakan seluruh layanan AI.
+The heart of the system, located in `moko_core/`, provides all AI services.
 
 #### Cognitive Router (`moko_core/moko_agents/router.py`)
-Router utama yang mengklasifikasikan setiap input pengguna menggunakan 3-tier routing:
-- **Tier 0-A (<1ms)**: Slash commands dan exact pattern matching
-- **Tier 0-B (~15ms)**: Semantic Vector Router — cosine similarity terhadap centroid domain
+Routes every user input using a 3-tier architecture:
+- **Tier 0-A (<1ms)**: Slash commands and exact pattern matching
+- **Tier 0-B (~15ms)**: Semantic Vector Router — cosine similarity against domain centroids
 - **Tier 0-C**: Rule-based keyword fallback
 
 #### Intent Router (`moko_core/moko_agents/intent_router.py`)
-Mengklasifikasikan kueri ke dalam intent:
-- `CODING` — pertanyaan pemrograman
-- `MATH` — matematika dan fisika
-- `DARKWEB` — pencarian darkweb/tor
-- `GENERAL` — pengetahuan umum
-- `PERSONAL` — percakapan personal
-- `SECURITY` — keamanan siber
-- `REASONING` — penalaran logis
-- `OS_CONTROL` — kontrol sistem operasi
+Classifies queries into intents:
+- `CODING` — programming questions
+- `MATH` — mathematics and physics
+- `DARKWEB` — darkweb/tor search
+- `GENERAL` — general knowledge
+- `PERSONAL` — personal conversation
+- `SECURITY` — cybersecurity
+- `REASONING` — logical reasoning
+- `OS_CONTROL` — operating system control
 
 #### Multi-Agent System (`moko_core/moko_agents/`)
-Sistem agen kognitif yang terinspirasi dari arsitektur otak manusia:
+A cognitive agent system inspired by the human brain architecture:
 
-| Agen | Fungsi |
-|------|--------|
-| **Prefrontal Node** | Perencanaan dan pengambilan keputusan eksekutif |
-| **Amygdala Node** | Deteksi urgensi dan respons emosional |
-| **Insula Node** | Kesadaran diri dan metakognisi |
-| **Cerebellum Node** | Koordinasi gerakan kognitif (eksekusi cepat) |
-| **Basal Ganglia** | Pemilihan aksi dan kebiasaan |
-| **DMN Node** | Default Mode Network — melamun dan introspeksi |
-| **ACC Node** | Anterior Cingulate Cortex — deteksi konflik |
-| **HPA Axis** | Respons stres dan adaptasi |
-| **Locus Coeruleus** | Modulasi perhatian dan kewaspadaan |
+| Agent | Function |
+|------|----------|
+| **Prefrontal Node** | Planning and executive decision-making |
+| **Amygdala Node** | Urgency detection and emotional response |
+| **Insula Node** | Self-awareness and metacognition |
+| **Cerebellum Node** | Cognitive movement coordination (fast execution) |
+| **Basal Ganglia** | Action selection and habits |
+| **DMN Node** | Default Mode Network — daydreaming and introspection |
+| **ACC Node** | Anterior Cingulate Cortex — conflict detection |
+| **HPA Axis** | Stress response and adaptation |
+| **Locus Coeruleus** | Attention modulation and alertness |
 
 ---
 
-### 2. Dual-System Architecture (System 1 & System 2)
+### 2. Dual-System Architecture
 
-Terinspirasi dari kerangka *Thinking, Fast and Slow* karya Daniel Kahneman.
+Inspired by *Thinking, Fast and Slow* by Daniel Kahneman.
 
-**System 1 (Cepat / Intuitif)**:
-- Eksekusi langsung oleh `ExecutorNode`
-- Untuk tugas rutin, pertanyaan sederhana, pencarian fakta
-- Latensi rendah, tanpa penalaran mendalam
+**System 1 (Fast / Intuitive)**:
+- Direct execution by `ExecutorNode`
+- For routine tasks, simple questions, fact retrieval
+- Low latency, no deep reasoning
 
-**System 2 (Lambat / Analitis)**:
-- Melibatkan `BrainNode` untuk perencanaan
-- `DualRuntimeGuard` untuk verifikasi
-- Iteratif: Plan → Execute → Review → Re-plan jika gagal
-- Untuk tugas kompleks: coding, debugging, matematika, keamanan
+**System 2 (Slow / Analytical)**:
+- Involves `BrainNode` for planning
+- `DualRuntimeGuard` for verification
+- Iterative: Plan → Execute → Review → Re-plan if failed
+- For complex tasks: coding, debugging, math, security
 
-Alur Dual-System:
 ```
                   ┌──────────┐
                   │  Query   │
@@ -169,9 +173,9 @@ Alur Dual-System:
               └────────┬────────┘
                        │
               ┌────────▼────────┐
-              │  Butuh System 2?│──Tidak──▶ System 1 (Executor)
+              │  Need System 2? │──No───▶ System 1 (Executor)
               └────────┬────────┘
-                       │ Ya
+                       │ Yes
               ┌────────▼────────┐
               │  Brain (Plan)   │
               └────────┬────────┘
@@ -181,492 +185,428 @@ Alur Dual-System:
               └────────┬────────┘
                        │
               ┌────────▼────────┐
-              │  Guard (Review) │──Lolos──▶ Commit
+              │  Guard (Review) │──Pass──▶ Commit
               └────────┬────────┘
-                       │ Gagal
+                       │ Fail
                        ▼
                   Re-plan (Brain)
 ```
 
-File kunci: `moko_core/moko_agents/dual_system/orchestrator.py`
+Key file: `moko_core/moko_agents/dual_system/orchestrator.py`
 
 ---
 
 ### 3. NeuroMath Engine
 
-**Ini adalah jantung matematis MOKO.** Bukan sekadar kalkulator — ini adalah sistem penalaran matematis yang terinspirasi dari neurosains kognitif.
+**This is MOKO's mathematical core.** Not just a calculator — it is a mathematical reasoning system inspired by cognitive neuroscience.
 
-`moko_core/moko_neuromath/` berisi **60+ modul** yang mencakup:
+`moko_core/moko_neuromath/` contains **60+ modules** including:
 
-| Modul | Fungsi |
-|-------|--------|
-| **PureMathEngine** | Matematika murni: aljabar, kalkulus, trigonometri, logaritma |
-| **ExactMathEngine** | Perhitungan presisi tinggi dengan verifikasi |
-| **ComputerMathEngine** | Matematika komputer: floating-point, numerik, error analysis |
-| **CSMathEngine** | Struktur data, algoritma, kompleksitas |
-| **AppliedFormulaEngine** | Formula terapan dari berbagai bidang |
-| **FormalReasoningEngine** | Penalaran formal dan logika matematika |
-| **StepLogicProver** | Pembuktian langkah-demi-langkah |
-| **SymbolicRegression** | Regresi simbolik untuk menemukan formula dari data |
-| **SymbolicSynthesizer** | Sintesis formula baru dari pola |
-| **ProgramVerificationEngine** | Verifikasi program dengan logika matematis |
-| **ActiveInference** | Mutasi formula berdasarkan Free Energy Principle (FEP) |
-| **FEPEngine** | Free Energy Principle — minimisasi surprisal |
-| **UncertaintyEngine** | Kuantifikasi ketidakpastian |
-| **MCTSReasoner** | Monte Carlo Tree Search untuk penalaran |
-| **CognitiveMap** | Peta kognitif untuk navigasi abstrak |
-| **DimensionalSynthesis** | Sintesis lintas dimensi dan domain |
-| **QuantumSimulator** | Simulasi quantum computing dasar |
-| **TuringConsciousnessEngine** | Eksperimen kesadaran buatan berbasis Turing |
-| **FormulaCritic** | Kritik dan evaluasi formula |
-| **FormulaGenesisEngine** | Penemuan formula baru secara otonom |
-| **AppliedMathTrainer** | Pelatihan matematika terapan |
-| **SleepConsolidation** | Konsolidasi memori matematis (seperti tidur pada otak) |
+| Module | Function |
+|-------|----------|
+| **PureMathEngine** | Pure math: algebra, calculus, trigonometry, logarithms |
+| **ExactMathEngine** | High-precision computation with verification |
+| **ComputerMathEngine** | Computer math: floating-point, numerical, error analysis |
+| **CSMathEngine** | Data structures, algorithms, complexity |
+| **AppliedFormulaEngine** | Applied formulas from various fields |
+| **FormalReasoningEngine** | Formal logic and mathematical reasoning |
+| **StepLogicProver** | Step-by-step theorem proving |
+| **SymbolicRegression** | Discover formulas from data |
+| **SymbolicSynthesizer** | Synthesize new formulas from patterns |
+| **ProgramVerificationEngine** | Program verification with mathematical logic |
+| **ActiveInference** | Formula mutation using Free Energy Principle |
+| **FEPEngine** | Free Energy Principle — surprisal minimization |
+| **UncertaintyEngine** | Uncertainty quantification |
+| **MCTSReasoner** | Monte Carlo Tree Search for reasoning |
+| **CognitiveMap** | Cognitive map for abstract navigation |
+| **DimensionalSynthesis** | Cross-dimensional and cross-domain synthesis |
+| **QuantumSimulator** | Basic quantum computing simulation |
+| **TuringConsciousnessEngine** | Turing-based artificial consciousness experiments |
+| **FormulaCritic** | Formula critique and evaluation |
+| **FormulaGenesisEngine** | Autonomous formula discovery |
+| **AppliedMathTrainer** | Applied mathematics training |
+| **SleepConsolidation** | Mathematical memory consolidation (sleep-like) |
 
 ---
 
 ### 4. Marathon Engine
 
-Sistem penalaran rantai panjang (`moko_core/moko_marathon/`) yang memungkinkan MOKO memecahkan masalah kompleks melalui langkah-langkah bertahap.
+Long-chain reasoning system (`moko_core/moko_marathon/`) that enables MOKO to solve complex problems through step-by-step iteration.
 
 ```
                  ┌──────────────────┐
-                 │    Pertanyaan    │
+                 │    Question      │
                  └────────┬─────────┘
                           │
               ┌───────────▼───────────┐
               │  Context Pager        │
-              │  (memori konteks)     │
               └───────────┬───────────┘
                           │
               ┌───────────▼───────────┐
-              │  Langkah 1: Analisis  │
+              │  Step 1: Analysis     │
               └───────────┬───────────┘
                           │
               ┌───────────▼───────────┐
-              │  Langkah 2: Penalaran │
+              │  Step 2: Reasoning    │
               └───────────┬───────────┘
                           │
                      ──▶ ... ◀──
                           │
               ┌───────────▼───────────┐
-              │  Kompresi Semantik    │
+              │  Semantic Compression │
               └───────────┬───────────┘
                           │
               ┌───────────▼───────────┐
-              │    Jawaban Akhir      │
+              │    Final Answer       │
               └───────────────────────┘
 ```
 
-Komponen:
-- **MarathonRunner** — koordinator siklus penalaran
-- **ContextPager** — manajemen memori konteks (paging)
-- **SemanticCompressor** — kompresi konteks otomatis agar tidak melebihi limit LLM
-- **PuzzleAssembler** — perakit teka-teki dari berbagai domain
-- **CodeAssembler** — perakit kode dari fragmen
-- **CodeVerifier** — verifikasi kode yang dihasilkan
-- **CrossVerifier** — verifikasi silang antar domain
-- **MarathonCodeSentinel** — pengawas kualitas kode maraton
-- **MarathonPitstop** — titik istirahat untuk evaluasi tengah jalan
-- **SecurityAuditor** — audit keamanan kode yang dihasilkan
-- **GitManager** — integrasi git untuk tracking perubahan
+Components:
+- **MarathonRunner** — reasoning cycle coordinator
+- **ContextPager** — context memory management (paging)
+- **SemanticCompressor** — automatic context compression to avoid LLM limit
+- **PuzzleAssembler** — cross-domain puzzle assembly
+- **CodeAssembler** — code fragment assembly
+- **CodeVerifier** — generated code verification
+- **CrossVerifier** — cross-domain verification
+- **MarathonCodeSentinel** — marathon code quality guard
+- **MarathonPitstop** — mid-way evaluation checkpoint
+- **SecurityAuditor** — code security audit
+- **GitManager** — git integration for change tracking
 
 ---
 
-### 5. RAG & Sistem Memori
+### 5. RAG & Memory System
 
-MOKO memiliki sistem memori berlapis yang memungkinkannya mengingat dan mengambil pengetahuan dari berbagai sumber.
+MOKO has a layered memory system that enables knowledge retrieval from multiple sources.
 
 `moko_core/moko_memory/`:
 
-| Komponen | Fungsi |
-|----------|--------|
-| **OmniVectorStore** | Vector database multi-domain (code, math, security, general, dll.) |
-| **RSAStorage** | Enkripsi dan penyimpanan berbasis RSA |
-| **WALManager** | Write-Ahead Logging untuk integritas data |
-| **KVCacheManager** | Manajemen KV-cache untuk inferensi LLM |
-| **NeuralWorkingMemory** | Memori kerja neural (short-term) |
-| **MultiDomainStorage** | Penyimpanan terdistribusi per domain pengetahuan |
-| **SessionStore** | Penyimpanan sesi percakapan |
-| **DiskManager** | Manajemen penyimpanan disk |
-| **GCTuner** | Garbage collection tuner untuk memori |
-| **SearchCache** | Cache pencarian untuk mempercepat retrieval |
-| **MokoRAGRetriever** | Retrieval RAG utama |
-| **MokoEmbedEngine** | Mesin embedding lokal |
-| **BinaryKnowledgeCodec** | Codec pengetahuan biner untuk kompresi |
-| **OmniHashEncoder** | Encoding hash multi-domain |
-| **OmniStorage** | Penyimpanan omni-domain terdistribusi |
-| **MathOmni** | Omni storage khusus matematika |
-| **ConvBuffer** | Buffer percakapan untuk context window |
-| **Ramdisk** | Ramdisk untuk akses cepat |
+| Component | Function |
+|----------|----------|
+| **OmniVectorStore** | Multi-domain vector database (code, math, security, general, etc.) |
+| **RSAStorage** | RSA-based encrypted storage |
+| **WALManager** | Write-Ahead Logging for data integrity |
+| **KVCacheManager** | KV-cache management for LLM inference |
+| **NeuralWorkingMemory** | Neural short-term working memory |
+| **MultiDomainStorage** | Distributed domain-specific storage |
+| **SessionStore** | Conversation session storage |
+| **DiskManager** | Storage management |
+| **GCTuner** | Memory garbage collection tuner |
+| **SearchCache** | Search cache for faster retrieval |
+| **MokoRAGRetriever** | Primary RAG retrieval |
+| **MokoEmbedEngine** | Local embedding engine |
+| **BinaryKnowledgeCodec** | Binary knowledge codec for compression |
+| **OmniHashEncoder** | Multi-domain hash encoding |
+| **OmniStorage** | Distributed omni-domain storage |
+| **MathOmni** | Math-specific omni storage |
+| **ConvBuffer** | Conversation buffer for context window |
+| **Ramdisk** | Fast-access ramdisk |
 | **HDCContext** | Hyperdimensional Computing context |
 
-Sistem RAG terdistribusi di port:
-- Port `11437` — server RAG utama
-- Auto-boot saat MOKO IDE menyala
-- Fallback aman jika server mati
-
-Pipeline RAG:
-```
-Query → Intent Classification → Domain Selection → Vector Retrieval
-  → Context Assembly → LLM Generation → Response
-```
+Distributed RAG at port `11437` with auto-boot and safe fallback.
 
 ---
 
 ### 6. MOKO IDE
 
-MOKO memiliki dua antarmuka IDE:
+MOKO has two IDE interfaces:
 
 #### A. MOKO IDE C++ (Native)
-- Dibangun dengan **Qt6** (C++)
-- 21 file source di `moko_ide_cpp/`
-- Fitur: code editor, syntax highlighting, terminal, chat panel, stress test
+- Built with **Qt6** (C++)
+- 21 source files in `moko_ide_cpp/`
+- Features: code editor, syntax highlighting, terminal, chat panel, stress test
 
 #### B. MOKO IDE Python
-- Antarmuka terminal (`moko_core/moko_os.py`)
-- Dual-mode: CLI dan GUI (PyQt6)
-- Integrasi LSP Client (`moko_core/moko_lsp/lsp_client.py`)
-  - Dukungan bahasa: Python, JavaScript, TypeScript, JSON, CSS, HTML
-  - Fitur: diagnostics, autocomplete, go-to-definition
-  - Fallback aman jika language server tidak tersedia
+- Terminal interface (`moko_core/moko_os.py`)
+- Dual-mode: CLI and GUI (PyQt6)
+- LSP Client integration (`moko_core/moko_lsp/lsp_client.py`)
+  - Languages: Python, JavaScript, TypeScript, JSON, CSS, HTML
+  - Features: diagnostics, autocomplete, go-to-definition
+  - Safe fallback when server unavailable
 - Code Structure Analysis (`moko_core/moko_utils/code_structure.py`)
-  - Pengecekan pasangan tag HTML/XML secara real-time
-  - Deteksi bracket imbalance `()[]{}`
+  - Real-time HTML/XML tag pair checking
+  - Bracket imbalance detection `()[]{}`
   - Wave underline + status bar indicator
 
 ---
 
-### 7. Akselerasi Native (C++/Rust)
+### 7. Native Acceleration (C++/Rust)
 
-Untuk performa maksimal, MOKO memiliki beberapa komponen native:
+Multiple native components for maximum performance:
 
 #### C++ Native (`moko_core/moko_native/`)
-- Compile dengan `build.sh`
-- Benchmark: `bench.py`
-- Integrasi Python via cpp_loader
+- Compile with `build.sh`, benchmark with `bench.py`
 
 #### C++ Core Kernel (`moko_core/moko_cpp_kernel/`)
-- `moko_kernel.cpp` — kernel utama
-- `simd_math.hpp` — operasi matematika SIMD
-- `thread_pool.hpp` — thread pool untuk paralelisasi
+- `moko_kernel.cpp` — main kernel
+- `simd_math.hpp` — SIMD math operations
+- `thread_pool.hpp` — parallelization thread pool
 - `mmap_io.hpp` — memory-mapped I/O
-- `libmoko_core.so` — shared library terkompilasi
-
-#### C++ Core (`moko_core/moko_cpp_core/`)
-- `moko_cpp_core.cpp` — core C++ untuk operasi berat
-- `libmoko_cpp.so` — shared library
+- `libmoko_core.so` — compiled shared library
 
 #### Rust Core (`moko_core/moko_rust_core/`)
-- Module Rust dengan Cargo
-- Operasi yang membutuhkan memory safety tinggi
+- Rust module with Cargo, focused on safe memory operations
 
 ---
 
-### 8. Sistem Keamanan
+### 8. Security System
 
 `moko_core/moko_security/`:
 
-| Modul | Fungsi |
-|-------|--------|
-| **RedTeamFuzzer** | Fuzzer keamanan otomatis — menguji celah keamanan |
-| **BlueTeamDefender** | Defender otomatis — melindungi dari serangan |
-| **GaussianNoiseEngine** | Menambahkan noise Gaussian untuk privasi diferensial |
+| Module | Function |
+|-------|----------|
+| **RedTeamFuzzer** | Automated security fuzzer — finds vulnerabilities |
+| **BlueTeamDefender** | Automated defender — protects against attacks |
+| **GaussianNoiseEngine** | Gaussian noise for differential privacy |
 
 ---
 
-### 9. Pipeline Fine-Tuning
+### 9. Fine-Tuning Pipeline
 
-`finetune/` berisi pipeline lengkap untuk fine-tuning model coding:
+`finetune/` contains a complete pipeline for fine-tuning coding models:
 
 **Base Model**: Qwen2.5-1.5B-Instruct (HF format, ~3GB)
-**Output**: LoRA adapter → GGUF untuk llama.cpp
+**Output**: LoRA adapter → GGUF for llama.cpp
 
 ```
-python3 moko_finetune.py --prepare    # Download base model dari HuggingFace
-python3 moko_finetune.py --build      # Bangun dataset coding
-python3 moko_finetune.py --train      # Jalankan fine-tuning
-python3 moko_finetune.py --status     # Cek status training
+python3 moko_finetune.py --prepare    # Download base model from HuggingFace
+python3 moko_finetune.py --build      # Build coding dataset
+python3 moko_finetune.py --train      # Start fine-tuning
+python3 moko_finetune.py --status     # Check training status
 ```
 
-**Dataset** (di `finetune/moko_datasets/`):
-- `moko_coder_dataset.jsonl` — 12.000+ sampah coding
-- `moko_algo_dataset.jsonl` — dataset algoritma
-- `moko_security_dataset.jsonl` — dataset keamanan siber
-- `moko_reasoning_dataset.jsonl` — dataset penalaran
-- `moko_multiturn_dataset.jsonl` — dataset multi-turn percakapan
-- `moko_os_code_dataset.jsonl` — dataset kode sistem operasi
-- `moko_programming_dataset.jsonl` — dataset pemrograman umum
-- `moko_docs_dataset.jsonl` — dataset dokumentasi
-- `moko_hex_encoder.jsonl` — dataset encoding heksadesimal
-- `moko_distill_dataset.jsonl` — dataset knowledge distillation
-- `moko_cpp_qt_dataset.jsonl` — dataset Qt/C++
-- `moko_ide_integration.jsonl` — dataset integrasi IDE
-- `moko_algo_dataset.jsonl` — dataset algoritma lanjutan
+**Datasets** (in `finetune/moko_datasets/`):
+- 13 datasets covering: coding algorithms, security, reasoning, multi-turn conversations, OS code, programming, documentation, hex encoding, knowledge distillation, Qt/C++, IDE integration
 
-**Pipeline Lengkap**:
+**Pipeline**:
 ```
-Download HF Model → Build Dataset → LoRA Training → Convert to GGUF → Load di llama.cpp
+Download HF Model → Build Dataset → LoRA Training → Convert to GGUF → Load in llama.cpp
 ```
 
 ---
 
-## Cara Menjalankan
-
-### Prasyarat
+## Quick Start
 
 ```bash
-# 1. Clone repositori
+# 1. Clone
 git clone https://github.com/brianatmoko/MOKO-AI.git
 cd MOKO-AI
 
-# 2. Buat virtual environment
+# 2. Virtual environment
 python3 -m venv moko_core/venv --upgrade-deps
 source moko_core/venv/bin/activate
 
-# 3. Install dependensi
-# (disesuaikan dengan kebutuhan, belum ada requirements.txt terpusat)
-pip install numpy  # core dependency
+# 3. Install dependencies
+pip install -r requirements.txt
 
-# 4. (Opsional) Download model untuk fine-tuning
-cd finetune
-python3 moko_finetune.py --prepare
+# 4. Run
+./moko.sh                      # Auto-detect mode
+./moko.sh --cli                # Force CLI mode
+./moko.sh --gui                # GUI mode (needs Qt6 + display)
+./moko.sh --daemon             # Web API mode (http://127.0.0.1:8000)
+./moko_cli.sh                  # CLI-only launcher
 ```
 
-### Menjalankan MOKO OS
+### CLI Commands
+
+```
+./moko.sh --cli
+```
+
+- Type any question to start a conversation
+- `/ai on` — enable local LLM
+- `/ai off` — disable local LLM
+- `exit` — quit
+
+### Daemon API
 
 ```bash
-# Terminal CLI Mode (otomatis)
-./moko.sh
-
-# Paksa CLI Mode
-./moko.sh --cli
-
-# GUI Mode (butuh Qt6 dan display server)
-./moko.sh --gui
-
-# Daemon Mode (web API)
 ./moko.sh --daemon
-
-# CLI-only launcher
-./moko_cli.sh
+curl http://127.0.0.1:8000
 ```
-
-### Mode CLI
-
-```
-./moko.sh --cli
-```
-
-Setelah masuk CLI:
-- Ketik pertanyaan apa saja untuk memulai percakapan
-- `/ai on` — aktifkan local LLM (butuh model dijalankan)
-- `/ai off` — nonaktifkan local LLM
-- `exit` — keluar
-
-### Mode GUI
-
-```
-./moko.sh --gui
-```
-
-MOKO akan:
-1. Menjalankan local LLM server di background
-2. Meluncurkan Native C++ IDE (jika sudah dikompilasi)
-3. Fallback ke Python GUI jika binary IDE tidak ditemukan
-
-### Mode Daemon
-
-```
-./moko.sh --daemon
-```
-
-Web API akan berjalan di `http://127.0.0.1:8000`
 
 ---
 
-## Persyaratan Sistem
+## Requirements
 
-| Komponen | Minimal | Rekomendasi |
+| Component | Minimum | Recommended |
 |----------|---------|-------------|
-| **CPU** | 4-core | 8-core + (untuk inferensi lokal) |
+| **CPU** | 4-core | 8-core+ (for local inference) |
 | **RAM** | 8 GB | 16 GB+ |
-| **GPU** | - | RTX 2050 4GB+ (untuk fine-tuning) |
-| **Storage** | 1 GB (source) | 10 GB+ (dengan model) |
+| **GPU** | - | RTX 2050 4GB+ (for fine-tuning) |
+| **Storage** | 1 GB (source) | 10 GB+ (with models) |
 | **OS** | Linux (kernel 5.x+) | Linux (kernel 6.x+) |
 | **Python** | 3.12 | 3.12 |
-| **Qt** | - | Qt6 (untuk IDE) |
-| **C++ Compiler** | g++ 11+ | g++ 13+ (untuk native) |
-| **Rust** | - | Rust 1.70+ (untuk rust core) |
+| **Qt** | - | Qt6 (for IDE) |
+| **C++** | g++ 11+ | g++ 13+ (for native) |
+| **Rust** | - | Rust 1.70+ (for rust core) |
 
-### Catatan Hardware
-- **Fine-tuning**: Diuji pada RTX 2050 4GB VRAM + 16GB RAM — berjalan lambat tapi stabil
-- **Inferensi lokal**: Butuh model GGUF + llama.cpp. Setup otomatis oleh MOKO Inference Server
-- **Tanpa GPU**: MOKO tetap berfungsi penuh dalam mode CLI dengan API LLM eksternal
+### Hardware Notes
+- **Fine-tuning**: Tested on RTX 2050 4GB VRAM + 16GB RAM — slow but stable
+- **Local inference**: Needs GGUF model + llama.cpp. Auto-setup by MOKO Inference Server
+- **No GPU**: MOKO works fully in CLI mode with external LLM API
 
 ---
 
-## Struktur Proyek
+## Project Structure
 
 ```
 MOKO-AI/
-├── moko.sh                     # Launcher utama (auto-detect mode)
-├── moko_cli.sh                 # Launcher CLI-only
-├── moko_launcher.sh            # Launcher alternatif
-├── moko-warmup.sh              # Script warmup sistem
-├── moko-models.sh              # Manajemen model
-├── moko-fix-limits.sh          # Fix system limits
-├── build_ide.sh                # Build MOKO IDE C++
-├── build_kernel.sh             # Build kernel C++
+├── moko.sh                     # Main launcher (auto-detect)
+├── moko_cli.sh                 # CLI-only launcher
+├── moko_launcher.sh            # Alternative launcher
+├── moko-warmup.sh              # System warmup
+├── moko-models.sh              # Model management
+├── moko-fix-limits.sh          # System limits fix
+├── build_ide.sh                # Build C++ IDE
+├── build_kernel.sh             # Build C++ kernel
+├── setup.py                    # pip install setup
+├── requirements.txt            # Python dependencies
 │
-├── moko_core/                  # ★ INTI SISTEM
-│   ├── moko_os.py              # Entry point CLI
-│   ├── moko_config/            # Konfigurasi sistem
-│   ├── moko_agents/            # Sistem multi-agen kognitif
-│   │   ├── router.py           # Cognitive Router utama
+├── moko_core/                  # ★ SYSTEM CORE
+│   ├── moko_os.py              # CLI entry point
+│   ├── moko_config/            # System configuration
+│   ├── moko_agents/            # Multi-agent cognitive system
+│   │   ├── router.py           # Main cognitive router
 │   │   ├── intent_router.py    # Intent classifier
 │   │   ├── dual_system/        # System 1 + System 2
-│   │   ├── coding/             # Agen coding (7 agen)
+│   │   ├── coding/             # 7 coding agents
 │   │   ├── software_builder/   # Software builder agent
-│   │   └── ...                 # 30+ node agen kognitif
-│   ├── moko_neuromath/         # ★ Mesin matematika (60+ modul)
+│   │   └── 30+ cognitive node agents
+│   ├── moko_neuromath/         # ★ Math engine (60+ modules)
 │   ├── moko_marathon/          # Marathon reasoning engine
-│   ├── moko_memory/            # Sistem memori & RAG
+│   ├── moko_memory/            # Memory & RAG system
 │   ├── moko_inference/         # LLM inference server
 │   ├── moko_crawler/           # Web & Tor crawler
-│   ├── moko_security/          # Sistem keamanan
+│   ├── moko_security/          # Security system
 │   ├── moko_super_learning/    # Super learning engine
-│   ├── moko_native/            # Akselerasi C++ / Rust
+│   ├── moko_native/            # C++/Rust acceleration
 │   ├── moko_cpp_kernel/        # C++ kernel
 │   ├── moko_cpp_core/          # C++ core library
 │   ├── moko_rust_core/         # Rust core module
-│   ├── moko_lsp/               # LSP client untuk IDE
-│   ├── moko_puzzles/           # Sistem teka-teki
+│   ├── moko_lsp/               # LSP client
+│   ├── moko_puzzles/           # Puzzle system
 │   ├── moko_cpu/               # CPU scheduler & governor
-│   ├── moko_tools/             # Tools (quantisasi, encoding, dll.)
-│   ├── moko_benchmark/         # Benchmark sistem
-│   └── moko_utils/             # Utilitas (UI, text, code)
+│   ├── moko_tools/             # Tools (quantization, encoding, etc.)
+│   ├── moko_benchmark/         # System benchmarks
+│   └── moko_utils/             # Utilities
 │
 ├── moko_ide_cpp/               # MOKO IDE C++ (Qt6)
 │   ├── main.cpp                # Entry point
-│   ├── moko_window.h/cpp       # Window utama
-│   ├── code_editor.h/cpp       # Code editor
-│   ├── chat_widget.h/cpp       # AI Chat panel
-│   ├── terminal_widget.h/cpp   # Terminal terintegrasi
+│   ├── moko_window.*           # Main window
+│   ├── code_editor.*           # Code editor
+│   ├── chat_widget.*           # AI chat panel
+│   ├── terminal_widget.*       # Integrated terminal
 │   ├── syntax_highlighter.*    # Syntax highlighting
-│   ├── helper_engine.*         # AI helper engine
+│   ├── helper_engine.*         # AI helper
 │   ├── find_bar.*              # Find & replace
-│   ├── settings_dialog.*       # Dialog pengaturan
-│   ├── graphify_dialog.*       # Dialog graph visualisasi
-│   └── stress_test_dialog.*    # Stress test dialog
+│   ├── settings_dialog.*       # Settings
+│   ├── graphify_dialog.*       # Graph visualization
+│   └── stress_test_dialog.*    # Stress test
 │
-├── finetune/                   # Pipeline fine-tuning
-│   ├── moko_finetune.py        # Script utama
+├── finetune/                   # Fine-tuning pipeline
+│   ├── moko_finetune.py        # Main script
 │   ├── moko_trainer_v2.py      # Trainer v2
-│   ├── moko_trainer_v3_7b.py   # Trainer v3 (7B model)
+│   ├── moko_trainer_v3_7b.py   # Trainer v3 (7B)
 │   ├── moko_data_factory.py    # Data factory
 │   ├── moko_distill_engine.py  # Knowledge distillation
 │   ├── moko_byteq_compressor.py# ByteQ compression
-│   ├── moko_hex_encoder.py     # Hex encoding
-│   ├── moko_datasets/          # 13 dataset coding
-│   └── ...                     # 20+ script pendukung
+│   ├── moko_datasets/          # 13 coding datasets
+│   └── 20+ supporting scripts
 │
-├── moko_config/                # Konfigurasi
-│   ├── api_keys.json           # API keys (OpenRouter, dll.)
-│   └── moko_settings.json      # Pengaturan sistem
+├── moko_config/                # Configuration
+│   ├── api_keys.json           # API keys (OpenRouter, etc.)
+│   └── moko_settings.json      # System settings
 │
-├── docs/                       # Dokumentasi
-│   ├── RINGKASAN_PROGRES.md    # Ringkasan progres
-│   ├── STRUKTUR_FOLDER_MOKO.md # Struktur folder detail
-│   └── riset/                  # 19 dokumen riset teknis
+├── docs/                       # Documentation
+│   ├── RINGKASAN_PROGRES.md    # Progress summary (ID)
+│   ├── STRUKTUR_FOLDER_MOKO.md # Detailed structure (ID)
+│   └── riset/                  # 19 technical research documents
 │
-└── share/                      # File sharing (man pages, dll.)
+└── .github/workflows/          # CI/CD
+    └── ci.yml                  # GitHub Actions
 ```
 
 ---
 
-## Catatan Teknis Penting
+## Key Technical Concepts
 
-### API Keys
-Konfigurasi API keys ada di `moko_config/api_keys.json`. Secara default MOKO menggunakan:
-- **Openroute/OpenRouter** — untuk akses LLM cloud gratis (Llama 3.1 8B, Gemma 3 12B, dll.)
-- **Local LLM** — via llama.cpp server di port lokal
-- **OpenCode** — API lokal untuk development
+### ByteQ Quantization
+An extreme 2-bit Lloyd quantization technique developed in-house. Compresses tensors ~6.8x with very low MSE (~1e-4). Implementation in `moko_tools/byteq_quantizer.py`.
 
-### Model Metadata
-- `MOKO-AI-4B-CryptoCore-Q3_K_M_moko_meta.json` — metadata untuk model 4B CryptoCore (Q3_K_M)
-- `MOKO-AI-4B-CryptoCore-BF16_moko_header.json` — header untuk model BF16
-- `MOKO-RAG-1.5B-ByteQ_moko_meta.json` — metadata untuk model RAG 1.5B dengan ByteQ
+### Omni Storage
+Multi-domain vector storage organizing knowledge into 8 domains: code, math, security, general, finance, personal, programming, reasoning. Each domain has embedding centroids for precise retrieval.
 
-### Konsep Kunci
+### Cognitive Templates
+Cognitive templates for various reasoning types. The system learns from experience and refines its templates over time.
 
-**ByteQ Quantization**: Teknik kuantisasi ekstrem 2-bit Lloyd yang dikembangkan sendiri. Mampu mengompresi tensor hingga ~6.8x dengan MSE sangat kecil (~1e-4). Implementasi di `moko_tools/byteq_quantizer.py`.
+### Marathon Pitstop
+A "rest" mechanism mid-reasoning to evaluate progress, compress context, and decide whether to continue or conclude.
 
-**Omni Storage**: Sistem penyimpanan vektor multi-domain yang mengorganisir pengetahuan ke dalam 8 domain: code, math, security, general, finance, personal, programming, reasoning. Setiap domain memiliki centroid embedding untuk retrieval yang presisi.
-
-**Cognitive Template**: Template kognitif untuk berbagai jenis penalaran. Sistem belajar dari pengalaman dan menyempurnakan template-nya seiring waktu.
-
-**Marathon Pitstop**: Mekanisme "istirahat" di tengah penalaran panjang untuk mengevaluasi progres, melakukan kompresi konteks, dan memutuskan apakah perlu melanjutkan atau cukup.
+### API Configuration
+API keys are in `moko_config/api_keys.json`. Default providers:
+- **OpenRouter** — Free cloud LLM access (Llama 3.1 8B, Gemma 3 12B, etc.)
+- **Local LLM** — via llama.cpp server on local port
+- **OpenCode** — Local development API
 
 ---
 
-## Visi & Masa Depan
+## Roadmap
 
-MOKO lahir dari keyakinan bahwa **kecerdasan buatan yang otonom, lokal, dan dapat dipercaya** bukanlah mimpi. Bahwa kita tidak harus bergantung pada API cloud raksasa untuk memiliki asisten berpikir yang cerdas.
-
-### Yang sudah tercapai:
-- ✅ Sistem multi-agen kognitif dengan arsitektur neural terinspirasi otak
-- ✅ Mesin matematika dengan 60+ modul penalaran
-- ✅ Dual-System (cepat + lambat) dengan loop iteratif
-- ✅ RAG multi-domain dengan vector store lokal
-- ✅ Pipeline fine-tuning dari Qwen ke MOKO Coder
-- ✅ IDE C++ native dengan LSP dan AI integration
-- ✅ Marathon reasoning untuk masalah kompleks
+### Achieved
+- ✅ Multi-agent cognitive system with brain-inspired neural architecture
+- ✅ Math engine with 60+ reasoning modules
+- ✅ Dual-System (fast + slow) with iterative loop
+- ✅ Multi-domain RAG with local vector store
+- ✅ Fine-tuning pipeline (Qwen → MOKO Coder)
+- ✅ Native C++ IDE with LSP and AI integration
+- ✅ Marathon reasoning for complex problems
 - ✅ Darkweb crawling via Tor
-- ✅ Puzzle system lintas domain
+- ✅ Cross-domain puzzle system
 
-### Yang perlu dilanjutkan:
-- ⏳ Integrasi penuh antara semua komponen
-- ⏳ Optimalisasi performa dan memori
-- ⏳ Dokumentasi API dan developer guide
-- ⏳ Unit testing yang komprehensif
-- ⏳ Packaging dan distribusi yang mudah
-- ⏳ Model MOKO Coder yang sudah di-fine-tune
-- ⏳ GUI yang lebih matang
+### Needs Work
+- Full integration between all components
+- Performance and memory optimization
+- API documentation and developer guide
+- Comprehensive unit testing
+- Easy packaging and distribution
+- Pre-fine-tuned MOKO Coder model
+- Mature GUI
 
 ---
 
-## Kontribusi
+## Contributing
 
-Proyek ini adalah **open-source** dan sangat membutuhkan kontributor. Jika Anda tertarik dengan AI otonom, sistem multi-agen, matematika komputasional, atau pengembangan IDE:
+This project is **open-source** and needs contributors. If you're interested in autonomous AI, multi-agent systems, computational math, or IDE development:
 
-1. **Fork** repositori ini
-2. **Clone** fork Anda
-3. **Baca** dokumentasi di `docs/` untuk memahami arsitektur
-4. **Mulai** dari issue atau area yang Anda kuasai
-5. **Kirim** Pull Request
+1. **Fork** this repository
+2. **Clone** your fork
+3. **Read** the docs in `docs/` to understand the architecture
+4. **Start** with a [good first issue](https://github.com/brianatmoko/MOKO-AI/issues)
+5. **Submit** a Pull Request
 
-Area yang paling membutuhkan bantuan:
-- Dokumentasi dan contoh penggunaan
-- Testing dan QA
-- Optimisasi performa
-- Packaging (pip installable)
-- Frontend GUI yang lebih baik
+### Areas Needing Help
+- Documentation and usage examples
+- Testing and QA
+- Performance optimization
+- Packaging (`pip install` ready)
+- Frontend/GUI improvement
 
-> *"MOKO adalah proyek ambisius yang dibangun dengan sumber daya terbatas. Tapi saya percaya fondasinya kuat. Saya menitipkannya pada siapa pun yang percaya bahwa AI lokal yang cerdas dan otonom adalah masa depan yang layak diperjuangkan."*
+> *"MOKO is an ambitious project built with limited resources. But I believe the foundation is solid. I entrust it to anyone who believes that intelligent, autonomous local AI is a future worth fighting for."*
 >
-> — Brian Atmoko, Pembuat MOKO
+> — Brian Atmoko, Creator of MOKO
 
 ---
 
-## Lisensi
+## License
 
-Proyek ini dilisensikan di bawah **MIT License** — silakan digunakan, dimodifikasi, dan disebarluaskan.
+MIT License — free to use, modify, and distribute.
 
 ---
 
 <p align="center">
   <b>MOKO AI</b><br>
-  <i>Bukan sekadar chatbot. Sistem operasi kognitif.</i><br>
+  <i>Not just a chatbot. A cognitive operating system.</i><br>
   <a href="https://github.com/brianatmoko/MOKO-AI">github.com/brianatmoko/MOKO-AI</a>
 </p>
