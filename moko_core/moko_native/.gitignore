@@ -1,0 +1,17 @@
+# Artefak build native (dihasilkan oleh build.sh) — jangan di-commit.
+# Bangun ulang dengan: bash moko_core/moko_native/build.sh
+
+# Shared library terkompilasi (C++ & Rust)
+*.so
+*.dylib
+*.dll
+
+# Direktori target build Rust
+rust/target/
+
+# Cargo.lock untuk cdylib bersifat opsional (bukan binary reproducible)
+rust/Cargo.lock
+
+# Cache kompilasi Python
+__pycache__/
+*.pyc

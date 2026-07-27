@@ -1,0 +1,34 @@
+[Unit]
+Description=MOKO Embedder — Lightweight Embedding Server (MOKO2.5-0.5B)
+Documentation=https://github.com/moko-os/moko-os
+After=network.target graphical-session.target
+Wants=graphical-session.target
+
+[Service]
+Type=simple
+# MOKO Embedder: MOKO2.5 0.5B (262MB) khusus untuk embedding
+# embedding=True + model kecil = ~340MB RAM saja
+ExecStart=/home/brianatmokoo/Documents/Linux/MOKO_OS_Project/moko_core/venv/bin/python3 -u \
+    /home/brianatmokoo/Documents/Linux/MOKO_OS_Project/moko_core/moko_inference/moko_server.py \
+    --port 11436 \
+    --model /home/brianatmokoo/.ollama/models/blobs/sha256-970aa74c0a90ef7482477cf803618e776e173c007bf957f635f1015bfcfef0e6 \
+    --ctx 512 \
+    --gpu 0 \
+    --threads 4 \
+    --embedding
+
+Restart=on-failure
+RestartSec=5s
+
+Environment=PYTHONPATH=/home/brianatmokoo/Documents/Linux/MOKO_OS_Project/moko_core
+Environment=HOME=/home/brianatmokoo
+
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=moko-embedder
+
+# Embedder boleh di-kill lebih dulu saat OOM (inferensi lebih prioritas)
+OOMScoreAdjust=700
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,17 @@
+[package]
+name = "moko_rust_core"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "moko_rust_core"
+crate-type = ["cdylib"]
+
+[dependencies]
+blake3 = "1.5.0"
+xxhash-rust = { version = "0.8.8", features = ["xxh3"] }
+rayon = "1.8.0"
+
+[dependencies.pyo3]
+version = "0.20.0"
+features = ["extension-module"]

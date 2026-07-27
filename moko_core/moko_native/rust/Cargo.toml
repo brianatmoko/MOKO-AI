@@ -1,0 +1,18 @@
+[package]
+name = "moko_native_rs"
+version = "0.1.0"
+edition = "2021"
+description = "MOKO Native Acceleration Core (Rust tier) — Anchor-RAG hot path with a C ABI identical to the C++ tier."
+license = "MIT"
+
+[lib]
+name = "moko_native_rs"
+# cdylib menghasilkan shared library (.so/.dylib/.dll) dengan C ABI stabil,
+# sehingga dapat dimuat oleh ctypes persis seperti tier C++.
+crate-type = ["cdylib"]
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+panic = "abort"

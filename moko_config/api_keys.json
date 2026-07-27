@@ -1,0 +1,61 @@
+[
+    {
+        "api_base": "http://localhost:4096/v1",
+        "api_keys": [
+            "opencode-free"
+        ],
+        "enabled": true,
+        "is_mandor": true,
+        "model_name": "auto",
+        "name": "opencode-free",
+        "provider": "opencode",
+        "timeout": 30
+    },
+    {
+        "api_base": "https://openrouter.ai/api/v1",
+        "api_keys": [
+            "${OPENROUTER_API_KEY}"
+        ],
+        "enabled": true,
+        "is_mandor": false,
+        "model_name": "meta-llama/llama-3.1-8b-instruct:free",
+        "name": "openrouter-free",
+        "provider": "openrouter",
+        "timeout": 60,
+        "extra_headers": {
+            "HTTP-Referer": "https://opencut.ai",
+            "X-Title": "OpenCut AI"
+        },
+        "free_models": [
+            "meta-llama/llama-3.1-8b-instruct:free",
+            "google/gemma-3-12b-it:free",
+            "mistralai/mistral-7b-instruct:free",
+            "qwen/qwen-2.5-7b-instruct:free",
+            "microsoft/phi-3-mini-128k-instruct:free"
+        ]
+    },
+    {
+        "api_base": "http://localhost:20128/v1",
+        "api_keys": [
+            "omni-free"
+        ],
+        "enabled": true,
+        "is_mandor": false,
+        "model_name": "auto",
+        "name": "omniroute-free",
+        "provider": "omniroute",
+        "timeout": 30
+    },
+    {
+        "api_base": "http://localhost:20130/v1",
+        "api_keys": [
+            "nine-free"
+        ],
+        "enabled": true,
+        "is_mandor": false,
+        "model_name": "auto",
+        "name": "ninerouter-free",
+        "provider": "ninerouter",
+        "timeout": 30
+    }
+]

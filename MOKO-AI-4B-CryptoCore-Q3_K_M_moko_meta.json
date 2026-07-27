@@ -1,0 +1,9 @@
+{
+  "model": "MOKO-AI-4B-CryptoCore-Q2_K.gguf",
+  "quantization": "Q2_K",
+  "moko.identity": "MOKO-AI-v1",
+  "moko.crypto_fingerprint": "4e2166b993e6ceb6048d2db5c3cb4753ff11b85434013907e4ae3d772371b4d8",
+  "moko.crypto_scheme": "HMAC-SHA256+MerkleMetadata",
+  "moko.description": "MOKO AI \u2014 Q2_K Compact. Sistem parameter offload ke disk lokal.",
+  "moko.base_architecture": "qwen35-hybrid-ssm-attention"
+}

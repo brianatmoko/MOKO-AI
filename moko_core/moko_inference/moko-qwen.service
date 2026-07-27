@@ -1,0 +1,38 @@
+[Unit]
+Description=MOKO AI — Sovereign Inference Server (Q3_K_M)
+Documentation=https://github.com/moko-os/moko-os
+After=network.target graphical-session.target
+Wants=graphical-session.target
+
+[Service]
+Type=simple
+# MOKO Compact Mode — Q3_K_M (2.2GB) + Disk mmap offload
+# Model dibaca via mmap — tidak semuanya di-pin ke RAM
+# CATATAN: Service ini TIDAK di-enable secara otomatis (disabled).
+# Jalankan manual: systemctl --user start moko-qwen.service
+# Atau gunakan tombol "Start Server" di MOKO IDE Status Panel.
+ExecStart=/home/brianatmokoo/Documents/Linux/MOKO_OS_Project/moko_core/venv/bin/python3 -u \
+    /home/brianatmokoo/Documents/Linux/MOKO_OS_Project/moko_core/moko_inference/moko_server.py \
+    --port 11435 \
+    --model /home/brianatmokoo/Documents/Linux/MOKO_OS_Project/MOKO-AI-4B-Q3_K_M.gguf \
+    --ctx 2048 \
+    --gpu 24 \
+    --threads 6
+
+# Jangan restart otomatis — biarkan user yang kontrol
+Restart=no
+
+# Environment
+Environment=PYTHONPATH=/home/brianatmokoo/Documents/Linux/MOKO_OS_Project/moko_core
+Environment=HOME=/home/brianatmokoo
+
+# Simpan log ke journal
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=moko-qwen
+
+# OOM: lebih baik kill server ini daripada proses desktop
+OOMScoreAdjust=500
+
+[Install]
+# WantedBy=default.target  <-- Sengaja dinonaktifkan, jangan auto-start saat login

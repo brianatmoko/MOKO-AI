@@ -1,0 +1,8 @@
+{
+  "model": "MOKO-RAG-1.5B-ByteQ.gguf",
+  "quantization": "Byte-Q (IQ2_XXS)",
+  "moko.identity": "MOKO-RAG-v1",
+  "moko.role": "RAG-Bridge",
+  "moko.description": "MOKO RAG Bridge \u2014 Ultra-efficient 2-bit quantization.",
+  "moko.base_architecture": "qwen2.5-1.5b-instruct"
+}

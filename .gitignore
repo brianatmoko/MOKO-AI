@@ -1,0 +1,50 @@
+# Python virtual environments
+moko_core/venv/
+lib/
+bin/
+lib64/
+pyvenv.cfg
+
+# ML Models & adapters
+finetune/base_model_hf/
+finetune/base_model_coder_hf/
+finetune/base_model/
+finetune/moko_adapters/
+*.gguf
+*.safetensors
+*.pt
+*.pth
+
+# RAG cache & runtime state
+.moko_omni/
+.moko_cache/
+.moko_cache.json
+.moko_claim_centroids.json
+.moko_domain_centroids.json
+.moko_forager_state.json
+.moko_session.jsonl
+.moko_super_learning_state.json
+
+# Log files
+*.log
+hs_err_pid*.log
+
+# Compiled binaries & build artifacts
+moko_core/moko_inference/llama_bin/
+moko_ide
+moko_ide_cpp/build/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+distill_dataset/
+
+# IDE / tool data
+.junie/
+.math_omni/
+.vscode/
+
+# OS artifacts
+Thumbs.db
+.DS_Store
