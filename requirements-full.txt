@@ -1,0 +1,12 @@
+-r requirements-core.txt
+torch==2.13.0
+transformers==5.14.1
+datasets==5.0.0
+accelerate==1.14.0
+peft==0.19.1
+trl==1.9.1
+bitsandbytes==0.50.0
+z3-solver==5.0.0.0
+pygame==2.6.1
+PyQt6==6.11.0
+arxiv==4.0.0
